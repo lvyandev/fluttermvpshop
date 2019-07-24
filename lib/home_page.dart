@@ -4,13 +4,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_mvp_shop/base/base_state.dart';
 import 'package:flutter_mvp_shop/model/entity/home/home_bean.dart';
 import 'package:flutter_mvp_shop/presenter/home_presenter.dart';
-import 'package:flutter_mvp_shop/ui/ads_banner.dart';
-import 'package:flutter_mvp_shop/ui/category_menu.dart';
-import 'package:flutter_mvp_shop/ui/hot_sellers.dart';
-import 'package:flutter_mvp_shop/ui/recommend_category.dart';
-import 'package:flutter_mvp_shop/ui/recommend_products.dart';
-import 'package:flutter_mvp_shop/ui/shop_manager_info.dart';
-import 'package:flutter_mvp_shop/ui/top_banner.dart';
+import 'package:flutter_mvp_shop/ui/home/ads_banner.dart';
+import 'package:flutter_mvp_shop/ui/home/category_menu.dart';
+import 'package:flutter_mvp_shop/ui/home/hot_sellers.dart';
+import 'package:flutter_mvp_shop/ui/home/recommend_category.dart';
+import 'package:flutter_mvp_shop/ui/home/recommend_products.dart';
+import 'package:flutter_mvp_shop/ui/home/shop_manager_info.dart';
+import 'package:flutter_mvp_shop/ui/home/top_banner.dart';
 
 import 'contract/home_contract.dart';
 
