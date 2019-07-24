@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter_mvp_shop/model/entity/home/home_bean.dart';
 import 'package:json_annotation/json_annotation.dart';
 

@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_mvp_shop/constant/api.dart';
 import 'package:flutter_mvp_shop/model/entity/base_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/base_list_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/home/home_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
 import 'package:flutter_mvp_shop/util/dio_utils.dart';
 
 Future getHomePageContent() async {
@@ -29,7 +31,7 @@ Future getHomeHotSellerContent(int pageNo) async {
       'page': pageNo,
     });
     Response response = await dio.post(HOME_HOT_SELLER_CONTENT, data: formData);
-    return response.data;
+    return BaseListBean<ProductBean>.fromJson(json.decode(response.data));
   } on DioError catch (e) {
     return print(e);
   }

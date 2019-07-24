@@ -1,28 +1,24 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'product_bean.g.dart';
+
+@JsonSerializable()
 class ProductBean {
+  @JsonKey(name: 'image')
   String image;
+  @JsonKey(name: 'mallPrice')
   double mallPrice;
+  @JsonKey(name: 'goodsName')
   String goodsName;
+  @JsonKey(name: 'goodsId')
   String goodsId;
+  @JsonKey(name: 'price')
   double price;
 
   ProductBean(
       {this.image, this.mallPrice, this.goodsName, this.goodsId, this.price});
 
-  ProductBean.fromJson(Map<String, dynamic> json) {
-    image = json['image'];
-    mallPrice = json['mallPrice'];
-    goodsName = json['goodsName'];
-    goodsId = json['goodsId'];
-    price = json['price'];
-  }
+  factory ProductBean.fromJson(Map<String, dynamic> json) => _$ProductBeanFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['image'] = this.image;
-    data['mallPrice'] = this.mallPrice;
-    data['goodsName'] = this.goodsName;
-    data['goodsId'] = this.goodsId;
-    data['price'] = this.price;
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$ProductBeanToJson(this);
 }
