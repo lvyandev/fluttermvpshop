@@ -1,3 +1,4 @@
+import 'package:flutter_mvp_shop/model/entity/home/home_bean.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'base_bean.g.dart';
@@ -5,11 +6,12 @@ part 'base_bean.g.dart';
 @JsonSerializable()
 class BaseBean<T> {
   @JsonKey(name: 'code')
-  String code;
+  final String code;
   @JsonKey(name: 'message')
-  String message;
-  @JsonKey(fromJson: _dataFromJson, toJson: _dataToJson)
-  T data;
+  final String message;
+  @JsonKey(name: 'data')
+  @_JsonConverter()
+  final T data;
 
   BaseBean({this.code, this.message, this.data});
 
@@ -24,6 +26,19 @@ class BaseBean<T> {
   }
 }
 
-T _dataFromJson<T>(Map<String, dynamic> input) => input['data'] as T;
+class _JsonConverter<T> implements JsonConverter<T, Object> {
+  const _JsonConverter();
 
-Map<String, dynamic> _dataToJson<T>(T input) => {'data': input};
+  @override
+  T fromJson(Object json) {
+    if (json is Map<String, dynamic> && json.containsKey('recommend')) {
+      return HomeBean.fromJson(json) as T;
+    }
+    return json as T;
+  }
+
+  @override
+  Object toJson(T object) {
+    return object;
+  }
+}

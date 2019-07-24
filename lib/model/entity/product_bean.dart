@@ -1,9 +1,9 @@
 class ProductBean {
   String image;
-  int mallPrice;
+  double mallPrice;
   String goodsName;
   String goodsId;
-  int price;
+  double price;
 
   ProductBean(
       {this.image, this.mallPrice, this.goodsName, this.goodsId, this.price});
