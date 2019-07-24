@@ -13,8 +13,7 @@ abstract class BaseState<T extends StatefulWidget, P extends BasePresenter<V>,
 
   Widget buildBody(BuildContext context);
 
-  void initData() {
-  }
+  void initData() {}
 
   @override
   void initState() {
@@ -38,8 +37,8 @@ abstract class BaseState<T extends StatefulWidget, P extends BasePresenter<V>,
   @override
   @mustCallSuper
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: buildBody(context),
+    return Container(
+      child: buildBody(context),
     );
   }
 

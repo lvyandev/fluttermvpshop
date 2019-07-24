@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_mvp_shop/constant/api.dart';
+import 'package:flutter_mvp_shop/model/entity/base_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/home/home_bean.dart';
 import 'package:flutter_mvp_shop/util/dio_utils.dart';
 
 Future getHomePageContent() async {
@@ -11,7 +15,7 @@ Future getHomePageContent() async {
       'lat': '35.87468',
     });
     Response response = await dio.post(HOME_PAGE_CONTENT, data: formData);
-    return response.data;
+    return BaseBean<HomeBean>.fromJson(json.decode(response.data));
   } on DioError catch (e) {
     return print(e);
   }

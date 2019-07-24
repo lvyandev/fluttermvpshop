@@ -24,11 +24,9 @@ class InnerWidgetsFlutterBinding extends WidgetsFlutterBinding {
     );
   }
 
-  ///
   /// 以下一大重写与 GestureBinding
   /// 唯一目的 把 _handlePointerDataPacket 方法 事件原始数据转换 改用
   /// 修改过的 PixelRatio
-
   @override
   void initInstances() {
     super.initInstances();
