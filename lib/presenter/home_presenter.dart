@@ -1,6 +1,6 @@
 import 'package:flutter_mvp_shop/contract/home_contract.dart';
-import 'package:flutter_mvp_shop/model/entity/base_bean.dart';
-import 'package:flutter_mvp_shop/model/entity/base_list_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/base/base_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/base/base_list_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/home/home_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
 import 'package:flutter_mvp_shop/model/service/api_service.dart';

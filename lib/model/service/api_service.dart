@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_mvp_shop/constant/api.dart';
-import 'package:flutter_mvp_shop/model/entity/base_bean.dart';
-import 'package:flutter_mvp_shop/model/entity/base_list_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/base/base_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/base/base_list_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/home/home_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
 import 'package:flutter_mvp_shop/util/dio_utils.dart';
