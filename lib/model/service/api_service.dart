@@ -48,3 +48,19 @@ Future getCategoryContent() async {
     return print(e);
   }
 }
+
+Future getCategoryProducts(int pageNo, String categoryId, String subCategoryId) async {
+  try {
+    Dio dio = DioUtils.getInstance();
+    dio.options.contentType = DioUtils.formUrlEncoded;
+    FormData formData = FormData.from({
+      'categoryId': categoryId,
+      'categorySubId': subCategoryId,
+      'page': pageNo,
+    });
+    Response response = await dio.post(CATEGORY_PRODUCTS, data: formData);
+    return BaseListBean<ProductBean>.fromJson(json.decode(response.data));
+  } on DioError catch (e) {
+    return print(e);
+  }
+}

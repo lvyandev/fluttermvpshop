@@ -8,3 +8,6 @@ const HOME_HOT_SELLER_CONTENT = BASE_URL + 'wxmini/homePageBelowConten';
 
 /// 分类信息
 const CATEGORY_CONTENT = BASE_URL + 'wxmini/getCategory';
+
+/// 分类商品列表
+const CATEGORY_PRODUCTS = BASE_URL + 'wxmini/getMallGoods';

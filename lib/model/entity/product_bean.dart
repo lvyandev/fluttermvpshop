@@ -14,14 +14,16 @@ class ProductBean {
   double mallPrice;
   @JsonKey(name: 'name')
   String name;
+  @JsonKey(name: 'oriPrice')
+  double originalPrice;
   @JsonKey(name: 'price')
   double price;
 
-
   ProductBean(this.goodsId, this.goodsName, this.image, this.mallPrice,
-      this.name, this.price);
+      this.name, this.originalPrice, this.price);
 
-  factory ProductBean.fromJson(Map<String, dynamic> json) => _$ProductBeanFromJson(json);
+  factory ProductBean.fromJson(Map<String, dynamic> json) =>
+      _$ProductBeanFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductBeanToJson(this);
 }
