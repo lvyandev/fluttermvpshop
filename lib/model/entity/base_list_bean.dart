@@ -15,10 +15,7 @@ class BaseListBean<T> {
 
   BaseListBean({this.code, this.message, this.data});
 
-  factory BaseListBean.fromJson(Map<String, dynamic> json) {
-    print('factory.json:$json');
-    return _$BaseListBeanFromJson<T>(json);
-  }
+  factory BaseListBean.fromJson(Map<String, dynamic> json) => _$BaseListBeanFromJson<T>(json);
 
   Map<String, dynamic> toJson() => _$BaseListBeanToJson(this);
 
@@ -33,10 +30,9 @@ class _JsonConverter<T> implements JsonConverter<T, Object> {
 
   @override
   T fromJson(Object json) {
-    print('Object json: $json');
     if (json is Map<String, dynamic> &&
         json.containsKey('mallPrice') &&
-        json.containsKey('goodsName')) {
+        json.containsKey('goodsId')) {
       return ProductBean.fromJson(json) as T;
     }
     return json as T;

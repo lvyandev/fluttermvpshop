@@ -53,7 +53,7 @@ class HotSellers extends StatelessWidget {
           width: double.infinity,
           alignment: Alignment.center,
           child: Text(
-            product.goodsName,
+            product.name,
             style: TextStyle(
               color: Colors.pink,
             ),

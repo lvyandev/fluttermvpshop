@@ -4,19 +4,22 @@ part 'product_bean.g.dart';
 
 @JsonSerializable()
 class ProductBean {
+  @JsonKey(name: 'goodsId')
+  String goodsId;
+  @JsonKey(name: 'goodsName')
+  String goodsName;
   @JsonKey(name: 'image')
   String image;
   @JsonKey(name: 'mallPrice')
   double mallPrice;
-  @JsonKey(name: 'goodsName')
-  String goodsName;
-  @JsonKey(name: 'goodsId')
-  String goodsId;
+  @JsonKey(name: 'name')
+  String name;
   @JsonKey(name: 'price')
   double price;
 
-  ProductBean(
-      {this.image, this.mallPrice, this.goodsName, this.goodsId, this.price});
+
+  ProductBean(this.goodsId, this.goodsName, this.image, this.mallPrice,
+      this.name, this.price);
 
   factory ProductBean.fromJson(Map<String, dynamic> json) => _$ProductBeanFromJson(json);
 
