@@ -14,12 +14,9 @@ class BaseListBean<T> {
   final List<T> data;
 
   BaseListBean({this.code, this.message, this.data});
-
-  factory BaseListBean.fromJson(Map<String, dynamic> json) {
-    print('factory.json:$json');
-    return _$BaseListBeanFromJson<T>(json);
-  }
-
+  
+  factory Data.fromJson(Map<String, dynamic> json) => _$BaseListBeanFromJson(json);
+  
   Map<String, dynamic> toJson() => _$BaseListBeanToJson(this);
 
   @override
