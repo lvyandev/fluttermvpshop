@@ -1,3 +1,4 @@
+import 'package:flutter_mvp_shop/model/entity/category/category_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -15,7 +16,8 @@ class BaseListBean<T> {
 
   BaseListBean({this.code, this.message, this.data});
 
-  factory BaseListBean.fromJson(Map<String, dynamic> json) => _$BaseListBeanFromJson<T>(json);
+  factory BaseListBean.fromJson(Map<String, dynamic> json) =>
+      _$BaseListBeanFromJson<T>(json);
 
   Map<String, dynamic> toJson() => _$BaseListBeanToJson(this);
 
@@ -30,10 +32,12 @@ class _JsonConverter<T> implements JsonConverter<T, Object> {
 
   @override
   T fromJson(Object json) {
-    if (json is Map<String, dynamic> &&
-        json.containsKey('mallPrice') &&
-        json.containsKey('goodsId')) {
-      return ProductBean.fromJson(json) as T;
+    if (json is Map<String, dynamic>) {
+      if (json.containsKey('mallPrice') && json.containsKey('goodsId')) {
+        return ProductBean.fromJson(json) as T;
+      } else if (json.containsKey('mallCategoryName')&&json.containsKey('bxMallSubDto')) {
+        return CategoryBean.fromJson(json) as T;
+      }
     }
     return json as T;
   }

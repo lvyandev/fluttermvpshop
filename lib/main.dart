@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvp_shop/main_page.dart';
+import 'package:flutter_mvp_shop/provide/top_category_tap_listener.dart';
 import 'package:flutter_mvp_shop/util/inner_widgets_flutter_binding.dart';
+import 'package:provide/provide.dart';
 
-void main() => InnerWidgetsFlutterBinding.ensureInitialized()
-  ..attachRootWidget(new MyApp())
-  ..scheduleWarmUpFrame();
+void main() {
+  var providers = Providers()
+    ..provide(Provider<OnCategoryTapListener>.value(OnCategoryTapListener()));
+  var app = new MyApp();
+  InnerWidgetsFlutterBinding.ensureInitialized()
+    ..attachRootWidget(
+      ProviderNode(
+        child: app,
+        providers: providers,
+      ),
+    )
+    ..scheduleWarmUpFrame();
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

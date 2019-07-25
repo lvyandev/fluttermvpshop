@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_mvp_shop/model/entity/category_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/category/category_bean.dart';
 
 class CategoryMenu extends StatelessWidget {
   final List<CategoryBean> data;

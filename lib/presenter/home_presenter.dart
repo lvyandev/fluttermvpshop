@@ -10,18 +10,18 @@ class HomePresenter extends IHomePresenter {
   void getHomeData() async {
     if (view != null) {
       view.showLoading();
+    }
 
-      final responseData = await getHomePageContent() as BaseBean<HomeBean>;
+    final responseData = await getHomePageContent() as BaseBean<HomeBean>;
+    if (view != null) {
+      view.hideLoading();
       if (responseData.code != '0' && responseData.message.isNotEmpty) {
-        view.hideLoading();
         view.showMessage(message: responseData.message);
       } else {
         var homeData = responseData.data;
         if (homeData != null) {
-          view.hideLoading();
           view.onReceiveHomeData(homeData);
         } else {
-          view.hideLoading();
           view.onRequestFailed(message: responseData.message);
         }
       }

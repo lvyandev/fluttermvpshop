@@ -3,9 +3,9 @@ import 'package:flutter_mvp_shop/model/entity/home/picture_info_bean.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class AdsBanner extends StatelessWidget {
-  final List<PictureInfoBean> data;
+  final List<PictureInfoBean> _data;
 
-  AdsBanner(this.data);
+  AdsBanner(this._data);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,10 @@ class AdsBanner extends StatelessWidget {
       height: 50,
       child: Swiper(
         scrollDirection: Axis.vertical,
-        itemCount: data.length,
+        itemCount: _data.length,
         autoplay: true,
         itemBuilder: (BuildContext context, int index) =>
-            Image.network(data[index].pictureUrl),
+            Image.network(_data[index].pictureUrl),
       ),
     );
   }

@@ -1,16 +1,16 @@
 class SubCategoryBean {
   String subId;
   String categoryId;
-  String subName;
+  String subCategoryName;
   String comments;
 
   SubCategoryBean(
-      {this.subId, this.categoryId, this.subName, this.comments});
+      {this.subId, this.categoryId, this.subCategoryName, this.comments});
 
   SubCategoryBean.fromJson(Map<String, dynamic> json) {
     subId = json['mallSubId'];
     categoryId = json['mallCategoryId'];
-    subName = json['mallSubName'];
+    subCategoryName = json['mallSubName'];
     comments = json['comments'];
   }
 
@@ -18,7 +18,7 @@ class SubCategoryBean {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['mallSubId'] = this.subId;
     data['mallCategoryId'] = this.categoryId;
-    data['mallSubName'] = this.subName;
+    data['mallSubName'] = this.subCategoryName;
     data['comments'] = this.comments;
     return data;
   }

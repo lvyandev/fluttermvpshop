@@ -1,7 +1,7 @@
 import 'package:flutter_mvp_shop/model/entity/home/shop_info_bean.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../category_bean.dart';
+import '../category/category_bean.dart';
 import '../product_bean.dart';
 import 'image_info_bean.dart';
 import 'picture_info_bean.dart';
@@ -33,13 +33,21 @@ class HomeBean {
   @JsonKey(name: 'category')
   List<CategoryBean> categories;
 
+  HomeBean(
+      this.banners,
+      this.shopInfo,
+      this.recommendProducts,
+      this.adsPicture,
+      this.recommendCategoryProducts1,
+      this.recommendCategoryProducts2,
+      this.recommendCategoryProducts3,
+      this.categoryImage1,
+      this.categoryImage2,
+      this.categoryImage3,
+      this.categories);
 
-  HomeBean(this.banners, this.shopInfo, this.recommendProducts, this.adsPicture,
-      this.recommendCategoryProducts1, this.recommendCategoryProducts2,
-      this.recommendCategoryProducts3, this.categoryImage1, this.categoryImage2,
-      this.categoryImage3, this.categories);
-
-  factory HomeBean.fromJson(Map<String, dynamic> json) => _$HomeBeanFromJson(json);
+  factory HomeBean.fromJson(Map<String, dynamic> json) =>
+      _$HomeBeanFromJson(json);
 
   Map<String, dynamic> toJson() => _$HomeBeanToJson(this);
 
@@ -47,6 +55,4 @@ class HomeBean {
   String toString() {
     return 'HomeBean{banners: $banners, shopInfo: $shopInfo, recommendProducts: $recommendProducts, adsPicture: $adsPicture, recommendCategoryProducts1: $recommendCategoryProducts1, recommendCategoryProducts2: $recommendCategoryProducts2, recommendCategoryProducts3: $recommendCategoryProducts3, categoryImage1: $categoryImage1, categoryImage2: $categoryImage2, categoryImage3: $categoryImage3, categories: $categories}';
   }
-
-
 }
