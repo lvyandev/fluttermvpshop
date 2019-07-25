@@ -33,17 +33,16 @@ class HomePresenter extends IHomePresenter {
     if (view != null) {
       view.showLoading();
 
-      final responseData = await getHomeHotSellerContent(pageNo) as BaseListBean<ProductBean>;
+      final responseData =
+          await getHomeHotSellerContent(pageNo) as BaseListBean<ProductBean>;
+      view.hideLoading();
       if (responseData.code != '0' && responseData.message.isNotEmpty) {
-        view.hideLoading();
         view.showMessage(message: responseData.message);
       } else {
         var productData = responseData.data;
         if (productData != null) {
-          view.hideLoading();
           view.onReceiveHotSellerData(productData);
         } else {
-          view.hideLoading();
           view.onRequestFailed(message: responseData.message);
         }
       }

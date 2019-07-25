@@ -15,6 +15,10 @@ abstract class BaseState<T extends StatefulWidget, P extends BasePresenter<V>,
 
   void initData() {}
 
+  void onShowLoading();
+
+  void onHideLoading();
+
   @override
   void initState() {
     super.initState();
@@ -46,6 +50,7 @@ abstract class BaseState<T extends StatefulWidget, P extends BasePresenter<V>,
   void showLoading() {
     setState(() {
       isLoading = true;
+      onShowLoading();
     });
   }
 
@@ -53,6 +58,7 @@ abstract class BaseState<T extends StatefulWidget, P extends BasePresenter<V>,
   void hideLoading() {
     setState(() {
       isLoading = false;
+      onHideLoading();
     });
   }
 }

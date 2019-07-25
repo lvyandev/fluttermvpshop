@@ -3,20 +3,22 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'base_list_bean.g.dart';
 
-@JsonSerializable(anyMap: true)
+@JsonSerializable()
 class BaseListBean<T> {
   @JsonKey(name: 'code')
   final String code;
   @JsonKey(name: 'message')
   final String message;
-  @JsonKey(name: 'data', )
+  @JsonKey(name: 'data')
   @_JsonConverter()
   final List<T> data;
 
   BaseListBean({this.code, this.message, this.data});
 
-  factory BaseListBean.fromJson(Map<String, dynamic> json) =>
-      _$BaseListBeanFromJson<T>(json);
+  factory BaseListBean.fromJson(Map<String, dynamic> json) {
+    print('factory.json:$json');
+    return _$BaseListBeanFromJson<T>(json);
+  }
 
   Map<String, dynamic> toJson() => _$BaseListBeanToJson(this);
 
@@ -31,6 +33,7 @@ class _JsonConverter<T> implements JsonConverter<T, Object> {
 
   @override
   T fromJson(Object json) {
+    print('Object json: $json');
     if (json is Map<String, dynamic> &&
         json.containsKey('mallPrice') &&
         json.containsKey('goodsName')) {

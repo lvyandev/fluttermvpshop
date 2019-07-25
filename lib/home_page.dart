@@ -127,9 +127,6 @@ class _HomePageState extends BaseState<HomePage, HomePresenter, IHomeView>
     _hotSellerList.addAll(list);
 
     _pageNo++;
-
-    _refreshController.refreshCompleted();
-    _refreshController.loadComplete();
   }
 
   @override
@@ -140,6 +137,16 @@ class _HomePageState extends BaseState<HomePage, HomePresenter, IHomeView>
         content: Text(message),
       ),
     );
+  }
+
+  @override
+  void onShowLoading() {}
+
+
+  @override
+  void onHideLoading() {
+    _refreshController.refreshCompleted();
+    _refreshController.loadComplete();
   }
 
   @override
