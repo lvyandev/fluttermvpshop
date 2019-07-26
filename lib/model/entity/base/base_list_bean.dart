@@ -33,7 +33,7 @@ class _JsonConverter<T> implements JsonConverter<T, Object> {
   @override
   T fromJson(Object json) {
     if (json is Map<String, dynamic>) {
-      if (json.containsKey('mallPrice') && json.containsKey('goodsId')) {
+      if (json.containsKey('goodsId')) {
         return ProductBean.fromJson(json) as T;
       } else if (json.containsKey('mallCategoryName')&&json.containsKey('bxMallSubDto')) {
         return CategoryBean.fromJson(json) as T;

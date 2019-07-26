@@ -18,9 +18,11 @@ class ProductBean {
   double originalPrice;
   @JsonKey(name: 'price')
   double price;
+  @JsonKey(name: 'presentPrice')
+  double presentPrice;
 
   ProductBean(this.goodsId, this.goodsName, this.image, this.mallPrice,
-      this.name, this.originalPrice, this.price);
+      this.name, this.originalPrice, this.price, this.presentPrice);
 
   factory ProductBean.fromJson(Map<String, dynamic> json) =>
       _$ProductBeanFromJson(json);

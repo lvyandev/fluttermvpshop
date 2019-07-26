@@ -15,6 +15,7 @@ ProductBean _$ProductBeanFromJson(Map<String, dynamic> json) {
     json['name'] as String,
     (json['oriPrice'] as num)?.toDouble(),
     (json['price'] as num)?.toDouble(),
+    (json['presentPrice'] as num)?.toDouble(),
   );
 }
 
@@ -27,4 +28,5 @@ Map<String, dynamic> _$ProductBeanToJson(ProductBean instance) =>
       'name': instance.name,
       'oriPrice': instance.originalPrice,
       'price': instance.price,
+      'presentPrice': instance.presentPrice,
     };

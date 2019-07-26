@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
+import 'package:flutter_mvp_shop/ui/category/product_item_widget.dart';
 
 class HotSellers extends StatelessWidget {
   final List<ProductBean> _data;
@@ -44,79 +45,9 @@ class HotSellers extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           crossAxisCount: 2,
           childAspectRatio: 1 / 1.21,
-          children: _data.map((product) => _buildItem(product)).toList(),
+          children: _data.map((product) => ProductItemWidget(product)).toList(),
         )
       ],
     );
   }
-
-  Widget _buildItem(ProductBean product) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          Image.network(product.image),
-          Container(
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: Text(
-              product.name,
-              style: TextStyle(
-                color: Colors.pink,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Flex(
-            direction: Axis.horizontal,
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      _buildRmbLabelSpan(),
-                      TextSpan(
-                        text: '${product.mallPrice}',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Text.rich(
-                  TextSpan(
-                    style: TextStyle(
-                      decoration: TextDecoration.lineThrough,
-                      color: Colors.grey[350],
-                    ),
-                    children: [
-                      _buildRmbLabelSpan(),
-                      TextSpan(
-                        text: '${product.price}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  _buildRmbLabelSpan() => TextSpan(
-        text: '￥',
-        style: TextStyle(fontSize: 10),
-      );
 }
