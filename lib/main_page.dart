@@ -56,11 +56,11 @@ class _MainPageState extends State<MainPage> {
           releaseText: '释放刷新',
           refreshingText: '正在刷新...',
           completeText: '刷新完成！',
-          failedText: '刷新失败',
+          failedText: '刷新失败！',
           idleText: '下拉刷新',
         ),
         footerBuilder: () => ClassicFooter(
-          idleText: '上拉加载...',
+          idleText: '上拉加载',
           noDataText: '没有更多数据...',
           loadingText: '加载中...',
         ),
