@@ -7,8 +7,6 @@ abstract class IHomeView extends IBaseView {
   void onReceiveHomeData(HomeBean homeBean);
 
   void onReceiveHotSellerData(List<ProductBean> list);
-
-  void onRequestFailed({String message: ""});
 }
 
 abstract class IHomePresenter<V extends IHomeView> extends BasePresenter<V> {

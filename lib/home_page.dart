@@ -70,8 +70,6 @@ class _HomePageState extends BaseState<HomePage, HomePresenter, IHomeView>
                 ),
                 controller: _refreshController,
                 enablePullUp: true,
-                header: ClassicHeader(),
-                footer: ClassicFooter(),
                 onRefresh: _onRefresh,
                 onLoading: _onLoading,
               );
@@ -128,20 +126,6 @@ class _HomePageState extends BaseState<HomePage, HomePresenter, IHomeView>
 
     _pageNo++;
   }
-
-  @override
-  void onRequestFailed({String message = ""}) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Text(message),
-      ),
-    );
-  }
-
-  @override
-  void onShowLoading() {}
-
 
   @override
   void onHideLoading() {

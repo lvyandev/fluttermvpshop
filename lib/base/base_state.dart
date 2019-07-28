@@ -15,9 +15,9 @@ abstract class BaseState<T extends StatefulWidget, P extends BasePresenter<V>,
 
   void initData() {}
 
-  void onShowLoading();
+  void onShowLoading() {}
 
-  void onHideLoading();
+  void onHideLoading() {}
 
   @override
   void initState() {

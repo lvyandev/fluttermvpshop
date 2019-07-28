@@ -22,7 +22,7 @@ class HomePresenter extends IHomePresenter {
         if (homeData != null) {
           view.onReceiveHomeData(homeData);
         } else {
-          view.onRequestFailed(message: responseData.message);
+          view.showMessage(message: responseData.message);
         }
       }
     }
@@ -43,7 +43,7 @@ class HomePresenter extends IHomePresenter {
         if (productData != null) {
           view.onReceiveHotSellerData(productData);
         } else {
-          view.onRequestFailed(message: responseData.message);
+          view.showMessage(message: responseData.message);
         }
       }
     }
