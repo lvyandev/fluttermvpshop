@@ -21,8 +21,7 @@ class _SubCategoryMenuState
     implements ISubCategoryView {
   final List<ProductBean> _data = List();
 
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController _refreshController = RefreshController();
 
   int _pageNo = 1;
 
@@ -33,14 +32,11 @@ class _SubCategoryMenuState
 
   @override
   Widget buildBody(BuildContext context) {
-    return SingleChildScrollView(
-      physics: NeverScrollableScrollPhysics(),
-      child: Column(
-        children: <Widget>[
-          _buildSubCategory(),
-          _buildProductList(),
-        ],
-      ),
+    return Column(
+      children: <Widget>[
+        _buildSubCategory(),
+        _buildProductList(),
+      ],
     );
   }
 
@@ -117,30 +113,27 @@ class _SubCategoryMenuState
       );
 
   _buildProductList() {
-    return Container(
-      width: 300,
-      height: MediaQueryData.fromWindow(window).size.height -
-          MediaQueryData.fromWindow(window).padding.top -
-          MediaQueryData.fromWindow(window).padding.bottom -
-          kToolbarHeight -
-          40 -
-          kBottomNavigationBarHeight,
-      child: SmartRefresher(
-        child: GridView.builder(
-          itemBuilder: (BuildContext context, int index) => ProductItemWidget(
-            _data[index],
-            type: ProductType.TYPE_CATEGORY,
+    return Expanded(
+      child: Container(
+        width: 300,
+        child: SmartRefresher(
+          child: GridView.builder(
+            shrinkWrap: true,
+            itemBuilder: (BuildContext context, int index) => ProductItemWidget(
+              _data[index],
+              type: ProductType.TYPE_CATEGORY,
+            ),
+            itemCount: _data.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1 / 1.5,
+            ),
           ),
-          itemCount: _data.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1 / 1.5,
-          ),
+          controller: _refreshController,
+          enablePullUp: true,
+          onRefresh: _onLoadData,
+          onLoading: () => _onLoadData(isRefresh: false),
         ),
-        controller: _refreshController,
-        enablePullUp: true,
-        onRefresh: _onLoadData,
-        onLoading: () => _onLoadData(isRefresh: false),
       ),
     );
   }
