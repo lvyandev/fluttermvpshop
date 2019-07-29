@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvp_shop/model/entity/category/category_bean.dart';
 import 'package:flutter_mvp_shop/provide/top_category_tap_listener.dart';
-import 'package:provide/provide.dart';
+import 'package:provider/provider.dart';
 
 class TopCategoryMenu extends StatefulWidget {
   final List<CategoryBean> _data;
@@ -29,17 +29,25 @@ class _TopCategoryMenuState extends State<TopCategoryMenu> {
       ),
       child: ListView.separated(
         physics: BouncingScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) => ListTile(
-          selected: _currentIndex == index,
-          contentPadding: EdgeInsets.only(left: 10),
-          onTap: () {
-            setState(() {
-              Provide.value<OnCategoryTapListener>(context)
-                  .onTapCategory(widget._data[index]);
-              _currentIndex = index;
-            });
-          },
-          title: Text(widget._data[index].categoryName),
+        itemBuilder: (BuildContext context, int index) =>
+            Consumer<OnCategoryTapListener>(
+          builder: (
+            BuildContext context,
+            OnCategoryTapListener value,
+            Widget child,
+          ) =>
+              ListTile(
+            selected: _currentIndex == index,
+            contentPadding: EdgeInsets.only(left: 10),
+            onTap: () {
+              setState(() {
+                value.onTapCategory(widget._data[index]);
+                _currentIndex = index;
+              });
+            },
+            title: child,
+          ),
+          child: Text(widget._data[index].categoryName),
         ),
         separatorBuilder: (BuildContext context, int index) => Divider(
           color: Colors.grey,

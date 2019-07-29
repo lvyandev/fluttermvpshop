@@ -8,7 +8,7 @@ import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
 import 'package:flutter_mvp_shop/presenter/category/sub_category_presenter.dart';
 import 'package:flutter_mvp_shop/provide/top_category_tap_listener.dart';
 import 'package:flutter_mvp_shop/ui/category/product_item_widget.dart';
-import 'package:provide/provide.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SubCategoryMenu extends StatefulWidget {
@@ -26,8 +26,10 @@ class _SubCategoryMenuState
 
   int _pageNo = 1;
 
-  String _categoryId;
+  String _categoryId = '4';
   String _subCategoryId;
+
+  int _currentSelectedIndex = 0;
 
   @override
   Widget buildBody(BuildContext context) {
@@ -47,11 +49,25 @@ class _SubCategoryMenuState
     return SubCategoryPresenter();
   }
 
-  _buildSubCategory() => Provide<OnCategoryTapListener>(
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // 此处在provider状态改变时被调用
+    final list = Provider.of<OnCategoryTapListener>(context).list;
+    if (list.isNotEmpty) {
+      _categoryId = list[0].categoryId;
+    }
+    _currentSelectedIndex = 0;
+    _subCategoryId = '';
+    _onLoadData();
+  }
+
+  _buildSubCategory() => Consumer<OnCategoryTapListener>(
         builder: (
           BuildContext context,
-          Widget child,
           OnCategoryTapListener value,
+          Widget child,
         ) =>
             Container(
           height: 40,
@@ -73,6 +89,7 @@ class _SubCategoryMenuState
               var item = value.list[index];
               return InkWell(
                 onTap: () {
+                  _currentSelectedIndex = index;
                   _categoryId = item.categoryId;
                   _subCategoryId = item.subId;
 
@@ -85,6 +102,11 @@ class _SubCategoryMenuState
                   ),
                   child: Text(
                     item.subCategoryName,
+                    style: TextStyle(
+                      color: _currentSelectedIndex == index
+                          ? Theme.of(context).accentColor
+                          : Theme.of(context).textTheme.title.color,
+                    ),
                   ),
                 ),
               );

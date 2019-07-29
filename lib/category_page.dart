@@ -6,7 +6,7 @@ import 'package:flutter_mvp_shop/presenter/category/category_presenter.dart';
 import 'package:flutter_mvp_shop/provide/top_category_tap_listener.dart';
 import 'package:flutter_mvp_shop/ui/category/sub_category_menu.dart';
 import 'package:flutter_mvp_shop/ui/category/top_category_menu.dart';
-import 'package:provide/provide.dart';
+import 'package:provider/provider.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -47,7 +47,7 @@ class _CategoryPageState
   @override
   void onReceiveCategoryData(List<CategoryBean> list) {
     if (list.isNotEmpty) {
-      Provide.value<OnCategoryTapListener>(context).onTapCategory(list[0]);
+      Provider.of<OnCategoryTapListener>(context).onTapCategory(list[0]);
     }
     _categoryList.clear();
     _categoryList.addAll(list);
