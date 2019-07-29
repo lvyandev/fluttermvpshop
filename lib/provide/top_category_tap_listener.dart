@@ -7,11 +7,13 @@ class OnCategoryTapListener with ChangeNotifier {
 
   void onTapCategory(CategoryBean category) {
     list.clear();
-    list.add(SubCategoryBean(
-      categoryId: '00',
-      subId: '00',
-      subCategoryName: '全部',
-    ));
+    list.add(
+      SubCategoryBean(
+        categoryId: category.categoryId,
+        subId: '',
+        subCategoryName: '全部',
+      ),
+    );
     list.addAll(category.subCategories);
     notifyListeners();
   }

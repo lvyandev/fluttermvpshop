@@ -3,6 +3,7 @@ import 'package:flutter_mvp_shop/main_page.dart';
 import 'package:flutter_mvp_shop/provide/top_category_tap_listener.dart';
 import 'package:flutter_mvp_shop/util/inner_widgets_flutter_binding.dart';
 import 'package:provide/provide.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 void main() {
   var providers = Providers()
@@ -36,7 +37,23 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      home: RefreshConfiguration(
+        hideFooterWhenNotFull: true,
+        shouldFooterFollowWhenNotFull: (LoadStatus status) => status == LoadStatus.noMore,
+        headerBuilder: () => ClassicHeader(
+          releaseText: '释放刷新',
+          refreshingText: '正在刷新...',
+          completeText: '刷新完成！',
+          failedText: '刷新失败！',
+          idleText: '下拉刷新',
+        ),
+        footerBuilder: () => ClassicFooter(
+          idleText: '上拉加载',
+          noDataText: '没有更多数据...',
+          loadingText: '加载中...',
+        ),
+        child: MainPage(),
+      ),
     );
   }
 }

@@ -49,25 +49,9 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RefreshConfiguration(
-        hideFooterWhenNotFull: true,
-        shouldFooterFollowWhenNotFull: (LoadStatus status) => status == LoadStatus.noMore,
-        headerBuilder: () => ClassicHeader(
-          releaseText: '释放刷新',
-          refreshingText: '正在刷新...',
-          completeText: '刷新完成！',
-          failedText: '刷新失败！',
-          idleText: '下拉刷新',
-        ),
-        footerBuilder: () => ClassicFooter(
-          idleText: '上拉加载',
-          noDataText: '没有更多数据...',
-          loadingText: '加载中...',
-        ),
-        child: IndexedStack(
-          index: _currentIndex,
-          children: _pageList,
-        ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pageList,
       ),
       backgroundColor: Colors.white70,
       bottomNavigationBar: BottomNavigationBar(
