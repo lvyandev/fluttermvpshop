@@ -171,14 +171,4 @@ class _SubCategoryMenuState
       _refreshController.loadNoData();
     }
   }
-
-  @override
-  showMessage({String message = ''}) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Text(message),
-      ),
-    );
-  }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter_mvp_shop/model/entity/detail/comment_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/home/picture_info_bean.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -10,7 +11,7 @@ class ProductDetailBean {
   PictureInfoBean adsPicture;
 
   @JsonKey(name: 'goodComments')
-  List<String> goodComments;
+  List<CommentBean> goodComments;
 
   @JsonKey(name: 'goodInfo')
   ProductBean productInfo;

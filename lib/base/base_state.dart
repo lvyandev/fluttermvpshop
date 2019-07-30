@@ -61,4 +61,15 @@ abstract class BaseState<T extends StatefulWidget, P extends BasePresenter<V>,
       onHideLoading();
     });
   }
+
+  @override
+  showMessage({String message = ''}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text('温馨提示'),
+        content: Text(message),
+      ),
+    );
+  }
 }

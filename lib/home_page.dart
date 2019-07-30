@@ -102,16 +102,6 @@ class _HomePageState extends BaseState<HomePage, HomePresenter, IHomeView>
   }
 
   @override
-  showMessage({String message = ''}) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Text(message),
-      ),
-    );
-  }
-
-  @override
   void onReceiveHomeData(HomeBean homeBean) {
     _homeBean = homeBean;
   }

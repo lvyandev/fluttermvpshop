@@ -12,7 +12,10 @@ ProductDetailBean _$ProductDetailBeanFromJson(Map<String, dynamic> json) {
         ? null
         : PictureInfoBean.fromJson(
             json['advertesPicture'] as Map<String, dynamic>),
-    (json['goodComments'] as List)?.map((e) => e as String)?.toList(),
+    (json['goodComments'] as List)
+        ?.map((e) =>
+            e == null ? null : CommentBean.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     json['goodInfo'] == null
         ? null
         : ProductBean.fromJson(json['goodInfo'] as Map<String, dynamic>),

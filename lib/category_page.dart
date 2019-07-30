@@ -52,14 +52,4 @@ class _CategoryPageState
     _categoryList.clear();
     _categoryList.addAll(list);
   }
-
-  @override
-  showMessage({String message = ''}) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Text(message),
-      ),
-    );
-  }
 }
