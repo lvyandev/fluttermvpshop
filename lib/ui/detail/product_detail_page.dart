@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_mvp_shop/base/base_state.dart';
 import 'package:flutter_mvp_shop/contract/product_detail_contract.dart';
 import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
@@ -103,12 +104,22 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
               ),
             ),
             Container(
-              height: 580,
+              height: 480,
               child: TabBarView(
                 controller: _tabController,
-                children: _tabs.map((tab) {
-                  return Text(tab);
-                }).toList(),
+                children: <Widget>[
+                  SingleChildScrollView(
+                    child: Html(
+                      data: productInfo.goodsDetail,
+                    ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => Text('$index'),
+                    itemCount: 20,
+                    itemExtent: 50,
+                  ),
+                ],
               ),
             ),
           ],
