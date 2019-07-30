@@ -1,5 +1,5 @@
 import 'package:flutter_mvp_shop/model/entity/category/category_bean.dart';
-import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'base_list_bean.g.dart';
@@ -35,7 +35,8 @@ class _JsonConverter<T> implements JsonConverter<T, Object> {
     if (json is Map<String, dynamic>) {
       if (json.containsKey('goodsId')) {
         return ProductBean.fromJson(json) as T;
-      } else if (json.containsKey('mallCategoryName')&&json.containsKey('bxMallSubDto')) {
+      } else if (json.containsKey('mallCategoryName') &&
+          json.containsKey('bxMallSubDto')) {
         return CategoryBean.fromJson(json) as T;
       }
     }

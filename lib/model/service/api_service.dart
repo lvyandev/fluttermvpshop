@@ -5,8 +5,9 @@ import 'package:flutter_mvp_shop/constant/api.dart';
 import 'package:flutter_mvp_shop/model/entity/base/base_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/base/base_list_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/category/category_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/detail/product_detail_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/home/home_bean.dart';
-import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
 import 'package:flutter_mvp_shop/util/dio_utils.dart';
 
 Future getHomePageContent() async {
@@ -60,6 +61,20 @@ Future getCategoryProducts(int pageNo, String categoryId, String subCategoryId) 
     });
     Response response = await dio.post(CATEGORY_PRODUCTS, data: formData);
     return BaseListBean<ProductBean>.fromJson(json.decode(response.data));
+  } on DioError catch (e) {
+    return print(e);
+  }
+}
+
+Future getProductDetails(String productId) async {
+  try {
+    Dio dio = DioUtils.getInstance();
+    dio.options.contentType = DioUtils.formUrlEncoded;
+    FormData formData = FormData.from({
+      'goodId': productId,
+    });
+    Response response = await dio.post(PRODUCT_DETAIL, data: formData);
+    return BaseBean<ProductDetailBean>.fromJson(json.decode(response.data));
   } on DioError catch (e) {
     return print(e);
   }

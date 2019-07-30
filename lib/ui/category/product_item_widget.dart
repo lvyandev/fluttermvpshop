@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvp_shop/base/application.dart';
 import 'package:flutter_mvp_shop/constant/product_type.dart';
-import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
+import 'package:flutter_mvp_shop/route/routes.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final ProductBean _data;
@@ -33,66 +35,72 @@ class ProductItemWidget extends StatelessWidget {
         break;
     }
 
-    return Container(
-      padding: EdgeInsets.all(5),
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          Image.network(_data.image),
-          Container(
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: Text(
-              productName,
-              style: TextStyle(
-                color: Colors.pink,
+    return InkWell(
+      onTap: () {
+        Application.router.navigateTo(
+            context, '${Routes.PRODUCT_DETAILS}?productId=${_data.goodsId}');
+      },
+      child: Container(
+        padding: EdgeInsets.all(5),
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            Image.network(_data.image),
+            Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: Text(
+                productName,
+                style: TextStyle(
+                  color: Colors.pink,
+                ),
+                maxLines: titleMaxLine,
+                overflow: TextOverflow.ellipsis,
               ),
-              maxLines: titleMaxLine,
-              overflow: TextOverflow.ellipsis,
             ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Flex(
-            direction: Axis.horizontal,
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      _buildRmbLabelSpan(),
-                      TextSpan(
-                        text: '$realPrice',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Text.rich(
-                  TextSpan(
-                    style: TextStyle(
-                      decoration: TextDecoration.lineThrough,
-                      color: Colors.grey[350],
-                    ),
-                    children: [
-                      _buildRmbLabelSpan(),
-                      TextSpan(
-                        text: '$showPrice',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
+            SizedBox(
+              height: 5,
+            ),
+            Flex(
+              direction: Axis.horizontal,
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        _buildRmbLabelSpan(),
+                        TextSpan(
+                          text: '$realPrice',
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              )
-            ],
-          )
-        ],
+                Expanded(
+                  flex: 1,
+                  child: Text.rich(
+                    TextSpan(
+                      style: TextStyle(
+                        decoration: TextDecoration.lineThrough,
+                        color: Colors.grey[350],
+                      ),
+                      children: [
+                        _buildRmbLabelSpan(),
+                        TextSpan(
+                          text: '$showPrice',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

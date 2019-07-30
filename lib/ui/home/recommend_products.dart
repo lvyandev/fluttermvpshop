@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
 
 class RecommendProducts extends StatelessWidget {
   final List<ProductBean> _data;

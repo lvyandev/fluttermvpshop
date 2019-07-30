@@ -2,7 +2,7 @@ import 'package:flutter_mvp_shop/model/entity/home/shop_info_bean.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../category/category_bean.dart';
-import '../product_bean.dart';
+import '../detail/product_bean.dart';
 import 'image_info_bean.dart';
 import 'picture_info_bean.dart';
 

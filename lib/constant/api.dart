@@ -11,3 +11,6 @@ const CATEGORY_CONTENT = BASE_URL + 'wxmini/getCategory';
 
 /// 分类商品列表
 const CATEGORY_PRODUCTS = BASE_URL + 'wxmini/getMallGoods';
+
+/// 商品详情
+const PRODUCT_DETAIL = BASE_URL + 'wxmini/getGoodDetailById';

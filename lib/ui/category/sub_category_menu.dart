@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mvp_shop/base/base_state.dart';
 import 'package:flutter_mvp_shop/constant/product_type.dart';
 import 'package:flutter_mvp_shop/contract/category/sub_category_contract.dart';
-import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
 import 'package:flutter_mvp_shop/presenter/category/sub_category_presenter.dart';
 import 'package:flutter_mvp_shop/provide/top_category_tap_listener.dart';
 import 'package:flutter_mvp_shop/ui/category/product_item_widget.dart';

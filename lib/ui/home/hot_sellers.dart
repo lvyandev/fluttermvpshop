@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
+import 'package:flutter_mvp_shop/base/application.dart';
+import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
+import 'package:flutter_mvp_shop/route/routes.dart';
 import 'package:flutter_mvp_shop/ui/category/product_item_widget.dart';
 
 class HotSellers extends StatelessWidget {

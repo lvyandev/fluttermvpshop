@@ -1,3 +1,4 @@
+import 'package:flutter_mvp_shop/model/entity/detail/product_detail_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/home/home_bean.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -31,8 +32,12 @@ class _JsonConverter<T> implements JsonConverter<T, Object> {
 
   @override
   T fromJson(Object json) {
-    if (json is Map<String, dynamic> && json.containsKey('recommend')) {
-      return HomeBean.fromJson(json) as T;
+    if (json is Map<String, dynamic>) {
+      if (json.containsKey('recommend')) {
+        return HomeBean.fromJson(json) as T;
+      } else if (json.containsKey('goodInfo')) {
+        return ProductDetailBean.fromJson(json) as T;
+      }
     }
     return json as T;
   }

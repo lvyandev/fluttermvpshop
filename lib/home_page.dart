@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mvp_shop/base/base_state.dart';
 import 'package:flutter_mvp_shop/model/entity/home/home_bean.dart';
-import 'package:flutter_mvp_shop/model/entity/product_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
 import 'package:flutter_mvp_shop/presenter/home_presenter.dart';
 import 'package:flutter_mvp_shop/ui/home/ads_banner.dart';
 import 'package:flutter_mvp_shop/ui/home/category_menu.dart';
