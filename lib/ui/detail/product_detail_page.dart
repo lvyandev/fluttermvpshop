@@ -33,15 +33,11 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
       appBar: AppBar(
         title: Text('${_data?.productInfo?.productName}'),
       ),
-      body: ConstrainedBox(
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            _buildList(),
-            _buildBottomBar(),
-          ],
-        ),
-        constraints: BoxConstraints.expand(),
+      body: Stack(
+        children: <Widget>[
+          _buildList(),
+          _buildBottomBar(),
+        ],
       ),
     );
   }
@@ -87,7 +83,7 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.symmetric(vertical: 10),
               child: Text(
-                '说明：>急速送达>正品保证',
+                '说明：> 急速送达 > 正品保证',
                 style: TextStyle(color: Colors.red),
               ),
             ),
@@ -107,8 +103,7 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
             ),
             Container(
               height: MediaQuery.of(context).size.height -
-                  MediaQueryData.fromWindow(window).padding.top -
-                  MediaQueryData.fromWindow(window).padding.bottom -
+                  MediaQuery.of(context).padding.top * 2 -
                   kToolbarHeight -
                   kBottomNavigationBarHeight -
                   kTextTabBarHeight,
