@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -29,7 +31,7 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
   Widget buildBody(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${_data?.productInfo?.goodsName}'),
+        title: Text('${_data?.productInfo?.productName}'),
       ),
       body: ConstrainedBox(
         child: Stack(
@@ -104,13 +106,18 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
               ),
             ),
             Container(
-              height: 480,
+              height: MediaQuery.of(context).size.height -
+                  MediaQueryData.fromWindow(window).padding.top -
+                  MediaQueryData.fromWindow(window).padding.bottom -
+                  kToolbarHeight -
+                  kBottomNavigationBarHeight -
+                  kTextTabBarHeight,
               child: TabBarView(
                 controller: _tabController,
                 children: <Widget>[
                   SingleChildScrollView(
                     child: Html(
-                      data: productInfo.goodsDetail,
+                      data: productInfo.detailHtmlContent,
                     ),
                   ),
                   ListView.builder(
@@ -136,7 +143,7 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            productInfo.goodsName,
+            productInfo.productName,
             style: Theme.of(context).textTheme.subtitle,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
@@ -145,7 +152,7 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
             height: 10,
           ),
           Text(
-            '编号：${productInfo.goodsSerialNumber}',
+            '编号：${productInfo.serialNumber}',
             style: TextStyle(
               fontSize: 12,
               color: Colors.grey,
@@ -189,7 +196,7 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
     return Positioned(
       bottom: 0,
       child: Container(
-        height: kToolbarHeight,
+        height: kBottomNavigationBarHeight,
         width: 400,
         color: Colors.white,
         child: Row(
@@ -212,7 +219,6 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
           onTap: onTap,
           child: Container(
             color: backgroundColor,
-            height: kToolbarHeight,
             alignment: Alignment.center,
             child: Text(
               text,

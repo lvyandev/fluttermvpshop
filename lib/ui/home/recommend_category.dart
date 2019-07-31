@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvp_shop/base/application.dart';
 import 'package:flutter_mvp_shop/model/entity/home/image_info_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/home/picture_info_bean.dart';
+import 'package:flutter_mvp_shop/route/routes.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class RecommendCategory extends StatelessWidget {
@@ -30,10 +32,16 @@ class RecommendCategory extends StatelessWidget {
       itemCount: _products.length,
       staggeredTileBuilder: (int index) =>
           StaggeredTile.count(2, index == 0 ? 2 : 1),
-      itemBuilder: (BuildContext context, int index) => Container(
-        child: Image.network(
-          _products[index].image,
-          fit: BoxFit.cover,
+      itemBuilder: (BuildContext context, int index) => InkWell(
+        onTap: () {
+          Application.router.navigateTo(context,
+              '${Routes.PRODUCT_DETAILS}?productId=${_products[index].productId}');
+        },
+        child: Container(
+          child: Image.network(
+            _products[index].image,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

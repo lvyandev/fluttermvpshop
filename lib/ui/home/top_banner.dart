@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvp_shop/base/application.dart';
 import 'package:flutter_mvp_shop/model/entity/home/image_info_bean.dart';
+import 'package:flutter_mvp_shop/route/routes.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class TopBanner extends StatelessWidget {
@@ -13,8 +15,13 @@ class TopBanner extends StatelessWidget {
       height: 178,
       child: Swiper(
         itemCount: _data.length,
-        itemBuilder: (BuildContext context, int index) =>
-            Image.network(_data[index].image),
+        itemBuilder: (BuildContext context, int index) => InkWell(
+          onTap: () {
+            Application.router.navigateTo(
+                context, '${Routes.PRODUCT_DETAILS}?productId=${_data[index].productId}');
+          },
+          child: Image.network(_data[index].image),
+        ),
         pagination: SwiperPagination(),
         autoplay: true,
       ),

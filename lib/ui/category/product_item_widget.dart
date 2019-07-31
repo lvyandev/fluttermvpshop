@@ -26,7 +26,7 @@ class ProductItemWidget extends StatelessWidget {
         showPrice = _data.price;
         break;
       case ProductType.TYPE_CATEGORY:
-        productName = _data.goodsName;
+        productName = _data.productName;
         realPrice = _data.presentPrice;
         showPrice = _data.originalPrice;
         titleMaxLine = 2;
@@ -38,7 +38,7 @@ class ProductItemWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         Application.router.navigateTo(
-            context, '${Routes.PRODUCT_DETAILS}?productId=${_data.goodsId}');
+            context, '${Routes.PRODUCT_DETAILS}?productId=${_data.productId}');
       },
       child: Container(
         padding: EdgeInsets.all(5),

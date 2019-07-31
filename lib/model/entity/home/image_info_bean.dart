@@ -1,18 +1,18 @@
 class ImageInfoBean {
   String image;
-  String goodsId;
+  String productId;
 
-  ImageInfoBean({this.image, this.goodsId});
+  ImageInfoBean({this.image, this.productId});
 
   ImageInfoBean.fromJson(Map<String, dynamic> json) {
     image = json['image'];
-    goodsId = json['goodsId'];
+    productId = json['goodsId'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['image'] = this.image;
-    data['goodsId'] = this.goodsId;
+    data['goodsId'] = this.productId;
     return data;
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_mvp_shop/base/application.dart';
 import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
+import 'package:flutter_mvp_shop/route/routes.dart';
 
 class RecommendProducts extends StatelessWidget {
   final List<ProductBean> _data;
@@ -34,7 +36,8 @@ class RecommendProducts extends StatelessWidget {
             height: 160,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => _buildItem(_data[index]),
+              itemBuilder: (context, index) =>
+                  _buildItem(context, _data[index]),
               itemCount: _data.length,
               separatorBuilder: (BuildContext context, int index) =>
                   _buildDivider(),
@@ -56,27 +59,35 @@ class RecommendProducts extends StatelessWidget {
         ),
       );
 
-  _buildItem(ProductBean product) => Container(
-        color: Colors.white,
-        width: 133,
-        child: Column(
-          children: <Widget>[
-            Image.network(
-              product.image,
-              height: 120,
-            ),
-            Text(
-              "￥${product.mallPrice}",
-            ),
-            Text(
-              '￥${product.price}',
-              style: TextStyle(
-                decoration: TextDecoration.lineThrough,
-                color: Colors.grey,
-                fontSize: 12,
+  _buildItem(BuildContext context, ProductBean product) => InkWell(
+        onTap: () {
+          Application.router.navigateTo(
+            context,
+            '${Routes.PRODUCT_DETAILS}?productId=${product.productId}',
+          );
+        },
+        child: Container(
+          color: Colors.white,
+          width: 133,
+          child: Column(
+            children: <Widget>[
+              Image.network(
+                product.image,
+                height: 120,
               ),
-            )
-          ],
+              Text(
+                "￥${product.mallPrice}",
+              ),
+              Text(
+                '￥${product.price}',
+                style: TextStyle(
+                  decoration: TextDecoration.lineThrough,
+                  color: Colors.grey,
+                  fontSize: 12,
+                ),
+              )
+            ],
+          ),
         ),
       );
 }

@@ -11,16 +11,7 @@ class ProductBean {
   String comPic;
 
   @JsonKey(name: 'goodsDetail')
-  String goodsDetail;
-
-  @JsonKey(name: 'goodsId')
-  String goodsId;
-
-  @JsonKey(name: 'goodsName')
-  String goodsName;
-
-  @JsonKey(name: 'goodsSerialNumber')
-  String goodsSerialNumber;
+  String detailHtmlContent;
 
   @JsonKey(name: 'image')
   String image;
@@ -58,6 +49,15 @@ class ProductBean {
   @JsonKey(name: 'presentPrice')
   double presentPrice;
 
+  @JsonKey(name: 'goodsId')
+  String productId;
+
+  @JsonKey(name: 'goodsName')
+  String productName;
+
+  @JsonKey(name: 'goodsSerialNumber')
+  String serialNumber;
+
   @JsonKey(name: 'shopId')
   String shopId;
 
@@ -67,10 +67,7 @@ class ProductBean {
   ProductBean(
       this.amount,
       this.comPic,
-      this.goodsDetail,
-      this.goodsId,
-      this.goodsName,
-      this.goodsSerialNumber,
+      this.detailHtmlContent,
       this.image,
       this.image1,
       this.image2,
@@ -83,6 +80,9 @@ class ProductBean {
       this.originalPrice,
       this.price,
       this.presentPrice,
+      this.productId,
+      this.productName,
+      this.serialNumber,
       this.shopId,
       this.state);
 
