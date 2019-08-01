@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvp_shop/db/shopping_cart_dao.dart';
+import 'package:flutter_mvp_shop/model/entity/shopping_cart/shopping_cart_bean.dart';
 import 'package:flutter_mvp_shop/provider/shopping_cart_provider.dart';
+import 'package:flutter_mvp_shop/ui/shopping_cart/shopping_cart_item.dart';
 import 'package:provider/provider.dart';
 
 class ShoppingCartPage extends StatefulWidget {
@@ -9,20 +11,27 @@ class ShoppingCartPage extends StatefulWidget {
 }
 
 class _ShoppingCartPageState extends State<ShoppingCartPage> {
-  String _text = '加载中...';
+  List<ShoppingCartBean> _list = [];
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('购物车'),
+        ),
         body: Consumer<ShoppingCartProvider>(
-          child: Text('$_text'),
+          child: ListView.builder(
+            itemBuilder: (BuildContext context, int index) => ShoppingCartItem(
+              _list[index],
+            ),
+            itemCount: _list.length,
+          ),
           builder:
               (BuildContext context, ShoppingCartProvider value, Widget child) {
-            print(ShoppingCartDao.instance.hashCode);
             ShoppingCartDao.instance.queryAll().then((list) {
-              print(list.toString());
-              _text = list.toString();
+              _list.clear();
+              _list.addAll(list);
             });
             return child;
           },
