@@ -1,11 +1,12 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvp_shop/provide/top_category_tap_listener.dart';
+import 'package:flutter_mvp_shop/provider/shopping_cart_provider.dart';
 import 'package:flutter_mvp_shop/util/inner_widgets_flutter_binding.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'base/application.dart';
+import 'provider/top_category_tap_listener.dart';
 import 'route/routes.dart';
 
 void main() {
@@ -14,12 +15,17 @@ void main() {
   Application.router = router;
 
   InnerWidgetsFlutterBinding.ensureInitialized()
-    ..attachRootWidget(
-      ChangeNotifierProvider<OnCategoryTapListener>.value(
-        child: MyApp(),
-        value: OnCategoryTapListener(),
-      ),
-    )
+    ..attachRootWidget(MultiProvider(
+      child: MyApp(),
+      providers: [
+        ChangeNotifierProvider<OnCategoryTapListener>(
+          builder: (_) => OnCategoryTapListener(),
+        ),
+        ChangeNotifierProvider<ShoppingCartProvider>(
+          builder: (_) => ShoppingCartProvider(),
+        ),
+      ],
+    ))
     ..scheduleWarmUpFrame();
 }
 

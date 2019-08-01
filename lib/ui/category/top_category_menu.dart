@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvp_shop/model/entity/category/category_bean.dart';
-import 'package:flutter_mvp_shop/provide/top_category_tap_listener.dart';
+import 'package:flutter_mvp_shop/provider/top_category_tap_listener.dart';
 import 'package:provider/provider.dart';
 
 class TopCategoryMenu extends StatefulWidget {

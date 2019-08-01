@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_mvp_shop/model/entity/category/category_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/category/sub_category_bean.dart';
 

@@ -7,7 +7,11 @@ import 'package:flutter_mvp_shop/base/base_state.dart';
 import 'package:flutter_mvp_shop/contract/product_detail_contract.dart';
 import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/detail/product_detail_bean.dart';
+import 'package:flutter_mvp_shop/model/entity/shopping_cart/shopping_cart_bean.dart';
 import 'package:flutter_mvp_shop/presenter/product_detail_presenter.dart';
+import 'package:flutter_mvp_shop/db/shopping_cart_dao.dart';
+import 'package:flutter_mvp_shop/provider/shopping_cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final String _productId;
@@ -200,8 +204,28 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
               child: Icon(Icons.shopping_cart),
               flex: 1,
             ),
-            _buildButton(Colors.green, '加入购物车', () {}),
-            _buildButton(Colors.red, '立即购买', () {}),
+            _buildButton(Colors.green, '加入购物车', () {
+              var productInfo = _data.productInfo;
+              var shoppingCartBean = ShoppingCartBean(
+                  productInfo.productId,
+                  productInfo.productName,
+                  productInfo.image1,
+                  productInfo.presentPrice);
+              ShoppingCartDao().insert(shoppingCartBean).then((index) {
+                print('加入购物车onShoppingCartChange');
+                Provider.of<ShoppingCartProvider>(context)
+                    .onShoppingCartChange();
+              });
+            }),
+            _buildButton(Colors.red, '立即购买', () {
+              ShoppingCartDao()
+                  .delete(_data.productInfo.productId)
+                  .then((index) {
+                print('立即购买onShoppingCartChange');
+                Provider.of<ShoppingCartProvider>(context)
+                    .onShoppingCartChange();
+              });
+            }),
           ],
         ),
       ),
