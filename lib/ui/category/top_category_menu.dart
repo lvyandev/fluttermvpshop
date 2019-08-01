@@ -29,26 +29,20 @@ class _TopCategoryMenuState extends State<TopCategoryMenu> {
       ),
       child: ListView.separated(
         physics: BouncingScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) =>
-            Consumer<OnCategoryTapListener>(
-          builder: (
-            BuildContext context,
-            OnCategoryTapListener value,
-            Widget child,
-          ) =>
-              ListTile(
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
             selected: _currentIndex == index,
             contentPadding: EdgeInsets.only(left: 10),
             onTap: () {
               setState(() {
-                value.onTapCategory(widget._data[index]);
+                Provider.of<OnCategoryTapListener>(context, listen: false)
+                    .onTapCategory(widget._data[index]);
                 _currentIndex = index;
               });
             },
-            title: child,
-          ),
-          child: Text(widget._data[index].categoryName),
-        ),
+            title: Text(widget._data[index].categoryName),
+          );
+        },
         separatorBuilder: (BuildContext context, int index) => Divider(
           color: Colors.grey,
           height: 0.5,

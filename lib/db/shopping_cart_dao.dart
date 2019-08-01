@@ -12,7 +12,18 @@ class ShoppingCartDao extends BaseDbDao {
   static const String _COLUMN_PRODUCT_IMAGES = 'images';
   static const String _COLUMN_PRODUCT_PRICE = 'price';
 
-  ShoppingCartDao();
+  static ShoppingCartDao _instance = ShoppingCartDao._();
+
+  static ShoppingCartDao get instance => _instance;
+
+//  static ShoppingCartDao _getInstance() {
+//    if (_instance == null) {
+//      _instance = ShoppingCartDao._();
+//    }
+//    return instance;
+//  }
+
+  ShoppingCartDao._();
 
   @override
   String tableName() {

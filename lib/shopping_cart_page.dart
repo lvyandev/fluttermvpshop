@@ -19,12 +19,10 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
           child: Text('$_text'),
           builder:
               (BuildContext context, ShoppingCartProvider value, Widget child) {
-            print('收到ShoppingCartProvider');
-            ShoppingCartDao().queryAll().then((list) {
-              print(list);
-              setState(() {
-                _text = list.toString();
-              });
+            print(ShoppingCartDao.instance.hashCode);
+            ShoppingCartDao.instance.queryAll().then((list) {
+              print(list.toString());
+              _text = list.toString();
             });
             return child;
           },

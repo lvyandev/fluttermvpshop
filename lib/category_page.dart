@@ -48,7 +48,8 @@ class _CategoryPageState
   @override
   void onReceiveCategoryData(List<CategoryBean> list) {
     if (list.isNotEmpty) {
-      Provider.of<OnCategoryTapListener>(context).onTapCategory(list[0]);
+      Provider.of<OnCategoryTapListener>(context, listen: false)
+          .onTapCategory(list[0]);
     }
     _categoryList.clear();
     _categoryList.addAll(list);

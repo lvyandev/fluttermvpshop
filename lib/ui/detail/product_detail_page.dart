@@ -201,7 +201,14 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
         child: Row(
           children: <Widget>[
             Expanded(
-              child: Icon(Icons.shopping_cart),
+              child: InkWell(onTap: () {
+                ShoppingCartDao.instance
+                    .deleteAll()
+                    .then((index) {
+                  Provider.of<ShoppingCartProvider>(context, listen: false)
+                      .onShoppingCartChange();
+                });
+              }, child: Icon(Icons.shopping_cart)),
               flex: 1,
             ),
             _buildButton(Colors.green, '加入购物车', () {
@@ -211,18 +218,16 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
                   productInfo.productName,
                   productInfo.image1,
                   productInfo.presentPrice);
-              ShoppingCartDao().insert(shoppingCartBean).then((index) {
-                print('加入购物车onShoppingCartChange');
-                Provider.of<ShoppingCartProvider>(context)
+              ShoppingCartDao.instance.insert(shoppingCartBean).then((index) {
+                Provider.of<ShoppingCartProvider>(context, listen: false)
                     .onShoppingCartChange();
               });
             }),
             _buildButton(Colors.red, '立即购买', () {
-              ShoppingCartDao()
+              ShoppingCartDao.instance
                   .delete(_data.productInfo.productId)
                   .then((index) {
-                print('立即购买onShoppingCartChange');
-                Provider.of<ShoppingCartProvider>(context)
+                Provider.of<ShoppingCartProvider>(context, listen: false)
                     .onShoppingCartChange();
               });
             }),

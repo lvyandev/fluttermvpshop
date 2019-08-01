@@ -41,7 +41,7 @@ abstract class BaseDbDao {
     if (isTableExists) {
       Database db = await SqlManager.getCurrentDatabase();
       return await db.execute('''
-        drop table ${tableSqlString()}
+        DELETE FROM ${tableName()}
         ''');
     }
   }
