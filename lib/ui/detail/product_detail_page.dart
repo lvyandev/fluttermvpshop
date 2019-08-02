@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_mvp_shop/base/application.dart';
 import 'package:flutter_mvp_shop/base/base_state.dart';
 import 'package:flutter_mvp_shop/contract/product_detail_contract.dart';
 import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
@@ -201,36 +202,30 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
         child: Row(
           children: <Widget>[
             Expanded(
-              child: InkWell(onTap: () {
-                ShoppingCartDao.instance
-                    .deleteAll()
-                    .then((index) {
-                  Provider.of<ShoppingCartProvider>(context, listen: false)
-                      .onShoppingCartChange();
-                });
-              }, child: Icon(Icons.shopping_cart)),
+              child: InkWell(
+                  onTap: () {
+                    Provider.of<ShoppingCartProvider>(
+                      context,
+                      listen: false,
+                    ).clear();
+                  },
+                  child: Icon(Icons.shopping_cart)),
               flex: 1,
             ),
             _buildButton(Colors.green, '加入购物车', () {
               var productInfo = _data.productInfo;
               var shoppingCartBean = ShoppingCartBean(
-                  productInfo.productId,
-                  productInfo.productName,
-                  productInfo.image1,
-                  productInfo.presentPrice);
-              ShoppingCartDao.instance.insert(shoppingCartBean).then((index) {
-                Provider.of<ShoppingCartProvider>(context, listen: false)
-                    .onShoppingCartChange();
-              });
+                productInfo.productId,
+                productInfo.productName,
+                productInfo.image1,
+                productInfo.presentPrice,
+              );
+              Provider.of<ShoppingCartProvider>(
+                context,
+                listen: false,
+              ).addItem(shoppingCartBean);
             }),
-            _buildButton(Colors.red, '立即购买', () {
-              ShoppingCartDao.instance
-                  .delete(_data.productInfo.productId)
-                  .then((index) {
-                Provider.of<ShoppingCartProvider>(context, listen: false)
-                    .onShoppingCartChange();
-              });
-            }),
+            _buildButton(Colors.red, '立即购买', () {}),
           ],
         ),
       ),

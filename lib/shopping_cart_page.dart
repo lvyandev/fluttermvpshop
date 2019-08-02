@@ -11,7 +11,10 @@ class ShoppingCartPage extends StatefulWidget {
 }
 
 class _ShoppingCartPageState extends State<ShoppingCartPage> {
-  List<ShoppingCartBean> _list = [];
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +24,31 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
           title: Text('购物车'),
         ),
         body: Consumer<ShoppingCartProvider>(
-          child: ListView.builder(
-            itemBuilder: (BuildContext context, int index) => ShoppingCartItem(
-              _list[index],
-            ),
-            itemCount: _list.length,
-          ),
           builder:
               (BuildContext context, ShoppingCartProvider value, Widget child) {
-            ShoppingCartDao.instance.queryAll().then((list) {
-              _list.clear();
-              _list.addAll(list);
-            });
-            return child;
+            print('LOG_收到ShoppingCartProvider');
+
+            return CustomScrollView(
+              slivers: <Widget>[
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return ShoppingCartItem(value.data[index]);
+                    },
+                    childCount: value.data.length,
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    child: Row(
+                      children: <Widget>[
+                        Container(color: Colors.green, child: Text('footer')),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
           },
         ),
       ),
