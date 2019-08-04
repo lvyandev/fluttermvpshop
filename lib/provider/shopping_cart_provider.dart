@@ -7,6 +7,10 @@ class ShoppingCartProvider with ChangeNotifier {
 
   List<ShoppingCartBean> get data => _list;
 
+  ShoppingCartProvider() {
+    getAllItems();
+  }
+
   void getAllItems() {
     ShoppingCartDao.instance.queryAll().then((data) {
       _list.clear();
@@ -16,11 +20,15 @@ class ShoppingCartProvider with ChangeNotifier {
   }
 
   void addItem(ShoppingCartBean item) {
-    ShoppingCartDao.instance.insert(item).then((index) => notifyListeners());
+    ShoppingCartDao.instance.insert(item).then((index) => getAllItems());
   }
 
   void deleteItem(String itemId) {
-    ShoppingCartDao.instance.delete(itemId).then((index) => notifyListeners());
+    ShoppingCartDao.instance.delete(itemId).then((index) {
+      var index = _list.indexWhere((item) => item.goodsId == itemId);
+      _list.removeAt(index);
+      notifyListeners();
+    });
   }
 
   void increaseItemCount(ShoppingCartBean item) {

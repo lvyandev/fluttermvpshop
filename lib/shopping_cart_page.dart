@@ -25,10 +25,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
         ),
         body: Consumer<ShoppingCartProvider>(
           builder:
-              (BuildContext context, ShoppingCartProvider value, Widget child) {
-            print('LOG_收到ShoppingCartProvider');
-
-            return CustomScrollView(
+              (BuildContext context, ShoppingCartProvider value, Widget child) => CustomScrollView(
               slivers: <Widget>[
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
@@ -40,16 +37,38 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                 ),
                 SliverToBoxAdapter(
                   child: Container(
-                    child: Row(
-                      children: <Widget>[
-                        Container(color: Colors.green, child: Text('footer')),
-                      ],
-                    ),
+                    height: value.data.length > 0 ? 40 : 0,
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    color: Colors.white,
+                    child: value.data.length > 0
+                        ? Builder(
+                            builder: (BuildContext context) {
+                              int count = 0;
+                              double totalPrice = .0;
+                              for (var value in value.data) {
+                                count += value.count;
+                                totalPrice += value.count * value.price;
+                              }
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text('共$count件商品'),
+                                  Text(
+                                    '小计： ￥$totalPrice',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          )
+                        : null,
                   ),
                 ),
               ],
-            );
-          },
+            ),
         ),
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvp_shop/model/entity/shopping_cart/shopping_cart_bean.dart';
+import 'package:flutter_mvp_shop/provider/shopping_cart_provider.dart';
 import 'package:flutter_mvp_shop/ui/shopping_cart/count_controller_widget.dart';
+import 'package:provider/provider.dart';
 
 class ShoppingCartItem extends StatelessWidget {
   final ShoppingCartBean _data;
@@ -66,7 +68,10 @@ class ShoppingCartItem extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   onPressed: () {
-
+                    Provider.of<ShoppingCartProvider>(
+                      context,
+                      listen: false,
+                    ).deleteItem(_data.goodsId);
                   },
                 ),
               ],
