@@ -11,6 +11,7 @@ class ShoppingCartDao extends BaseDbDao {
   static const String _COLUMN_PRODUCT_COUNT = 'count';
   static const String _COLUMN_PRODUCT_IMAGES = 'images';
   static const String _COLUMN_PRODUCT_PRICE = 'price';
+  static const String _COLUMN_PRODUCT_SELECTED = 'selected';
 
   static ShoppingCartDao _instance = ShoppingCartDao._();
 
@@ -37,7 +38,9 @@ class ShoppingCartDao extends BaseDbDao {
         $_COLUMN_PRODUCT_NAME TEXT not null,
         $_COLUMN_PRODUCT_COUNT INT not null,
         $_COLUMN_PRODUCT_IMAGES TEXT not null,
-        $_COLUMN_PRODUCT_PRICE DOUBLE not null)
+        $_COLUMN_PRODUCT_PRICE DOUBLE not null,
+        $_COLUMN_PRODUCT_SELECTED INT DEFAULT 1
+        )
     ''';
   }
 
@@ -89,6 +92,14 @@ class ShoppingCartDao extends BaseDbDao {
       where: '$_COLUMN_PRODUCT_ID = ?',
       whereArgs: [info.goodsId],
     );
+  }
+
+  Future<void> updateColumn(String columnName, dynamic value) async {
+    Database database = await getDataBase();
+
+    return await database.execute('UPDATE $_TABLE_NAME set $columnName= ?', [
+      value,
+    ]);
   }
 
   Future<int> delete(String productId) async {

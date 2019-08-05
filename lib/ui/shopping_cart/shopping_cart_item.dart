@@ -20,8 +20,13 @@ class ShoppingCartItem extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Checkbox(
-            value: true,
-            onChanged: (bool value) {},
+            value: _data.selected,
+            onChanged: (bool value) {
+              Provider.of<ShoppingCartProvider>(
+                context,
+                listen: false,
+              ).selectItem(_data);
+            },
           ),
           Container(
             margin: EdgeInsets.only(right: 10),

@@ -7,6 +7,12 @@ class ShoppingCartProvider with ChangeNotifier {
 
   List<ShoppingCartBean> get data => _list;
 
+  int count;
+
+  double totalPrice;
+
+  bool isAllSelected = true;
+
   ShoppingCartProvider() {
     getAllItems();
   }
@@ -15,6 +21,17 @@ class ShoppingCartProvider with ChangeNotifier {
     ShoppingCartDao.instance.queryAll().then((data) {
       _list.clear();
       _list.addAll(data);
+      isAllSelected = true;
+      count = 0;
+      totalPrice = 0;
+      _list.forEach((item) {
+        if (item.selected) {
+          count += item.count;
+          totalPrice += item.price * item.count;
+        } else {
+          isAllSelected = false;
+        }
+      });
       notifyListeners();
     });
   }
@@ -24,24 +41,32 @@ class ShoppingCartProvider with ChangeNotifier {
   }
 
   void deleteItem(String itemId) {
-    ShoppingCartDao.instance.delete(itemId).then((index) {
-      var index = _list.indexWhere((item) => item.goodsId == itemId);
-      _list.removeAt(index);
-      notifyListeners();
-    });
+    ShoppingCartDao.instance.delete(itemId).then((index) => getAllItems());
+  }
+
+  void selectItem(ShoppingCartBean item) {
+    item.selected = !item.selected;
+    ShoppingCartDao.instance.update(item).then((index) => getAllItems());
+  }
+
+  void selectAll(bool selected) {
+    isAllSelected = selected;
+    ShoppingCartDao.instance
+        .updateColumn('selected', selected ? 1 : 0)
+        .then((v) => getAllItems());
   }
 
   void increaseItemCount(ShoppingCartBean item) {
     item.count++;
-    ShoppingCartDao.instance.update(item).then((index) => notifyListeners());
+    ShoppingCartDao.instance.update(item).then((index) => getAllItems());
   }
 
   void decreaseItemCount(ShoppingCartBean item) {
     item.count--;
-    ShoppingCartDao.instance.update(item).then((index) => notifyListeners());
+    ShoppingCartDao.instance.update(item).then((index) => getAllItems());
   }
 
   void clear() {
-    ShoppingCartDao.instance.deleteAll().then((index) => notifyListeners());
+    ShoppingCartDao.instance.deleteAll().then((index) => getAllItems());
   }
 }

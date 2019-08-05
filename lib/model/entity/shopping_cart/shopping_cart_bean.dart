@@ -1,23 +1,15 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'shopping_cart_bean.g.dart';
-
-@JsonSerializable()
 class ShoppingCartBean {
-  @JsonKey(name: 'count')
   int count;
 
-  @JsonKey(name: 'goodsId')
   String goodsId;
 
-  @JsonKey(name: 'goodsName')
   String goodsName;
 
-  @JsonKey(name: 'images')
   String images;
 
-  @JsonKey(name: 'price')
   double price;
+
+  bool selected;
 
   ShoppingCartBean(
     this.goodsId,
@@ -25,15 +17,30 @@ class ShoppingCartBean {
     this.images,
     this.price, {
     this.count = 1,
+    this.selected = true,
   });
 
-  factory ShoppingCartBean.fromJson(Map<String, dynamic> srcJson) =>
-      _$ShoppingCartBeanFromJson(srcJson);
+  factory ShoppingCartBean.fromJson(Map<String, dynamic> json) =>
+      ShoppingCartBean(
+        json['goodsId'] as String,
+        json['goodsName'] as String,
+        json['images'] as String,
+        (json['price'] as num)?.toDouble(),
+        count: json['count'] as int ?? 1,
+        selected: (json['selected'] as num) == 1,
+      );
 
-  Map<String, dynamic> toJson() => _$ShoppingCartBeanToJson(this);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'count': this.count,
+        'goodsId': this.goodsId,
+        'goodsName': this.goodsName,
+        'images': this.images,
+        'price': this.price,
+        'selected': this.selected,
+      };
 
   @override
   String toString() {
-    return 'ShoppingCartBean{count: $count, goodsId: $goodsId, goodsName: $goodsName, images: $images, price: $price}';
+    return 'ShoppingCartBean{count: $count, goodsId: $goodsId, goodsName: $goodsName, images: $images, price: $price, selected: $selected}';
   }
 }
