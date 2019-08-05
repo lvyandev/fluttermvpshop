@@ -15,7 +15,6 @@ class ShoppingCartItem extends StatelessWidget {
       color: Colors.white,
       padding: EdgeInsets.symmetric(
         vertical: 5,
-        horizontal: 10,
       ),
       child: Row(
         children: <Widget>[

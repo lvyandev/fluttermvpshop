@@ -1,17 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mvp_shop/provider/main_index_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'category_page.dart';
 import 'home_page.dart';
 import 'member_page.dart';
 import 'shopping_cart_page.dart';
 
-class MainPage extends StatefulWidget {
-  @override
-  _MainPageState createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
+class MainPage extends StatelessWidget {
   final List<BottomNavigationBarItem> _bottomTabs = [
     BottomNavigationBarItem(
       icon: Icon(CupertinoIcons.home),
@@ -38,15 +35,9 @@ class _MainPageState extends State<MainPage> {
     MemberPage(),
   ];
 
-  int _currentIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    var _currentIndex = Provider.of<MainIndexProvider>(context).currentIndex;
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
@@ -58,9 +49,7 @@ class _MainPageState extends State<MainPage> {
         currentIndex: _currentIndex,
         items: _bottomTabs,
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          Provider.of<MainIndexProvider>(context).setIndex(index);
         },
       ),
     );

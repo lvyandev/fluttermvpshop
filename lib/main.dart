@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mvp_shop/provider/main_index_provider.dart';
 import 'package:flutter_mvp_shop/provider/shopping_cart_provider.dart';
 import 'package:flutter_mvp_shop/util/inner_widgets_flutter_binding.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,9 @@ void main() {
     ..attachRootWidget(MultiProvider(
       child: MyApp(),
       providers: [
+        ChangeNotifierProvider<MainIndexProvider>(
+          builder: (_) => MainIndexProvider(),
+        ),
         ChangeNotifierProvider<OnCategoryTapListener>(
           builder: (_) => OnCategoryTapListener(),
         ),

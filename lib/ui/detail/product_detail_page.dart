@@ -11,6 +11,7 @@ import 'package:flutter_mvp_shop/model/entity/detail/product_detail_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/shopping_cart/shopping_cart_bean.dart';
 import 'package:flutter_mvp_shop/presenter/product_detail_presenter.dart';
 import 'package:flutter_mvp_shop/db/shopping_cart_dao.dart';
+import 'package:flutter_mvp_shop/provider/main_index_provider.dart';
 import 'package:flutter_mvp_shop/provider/shopping_cart_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -202,15 +203,46 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
         child: Row(
           children: <Widget>[
             Expanded(
-              child: InkWell(
-                  onTap: () {
-                    Provider.of<ShoppingCartProvider>(
-                      context,
-                      listen: false,
-                    ).clear();
-                  },
-                  child: Icon(Icons.shopping_cart)),
-              flex: 1,
+              child: Consumer<ShoppingCartProvider>(
+                child: InkWell(
+                    onTap: () {
+                      Provider.of<MainIndexProvider>(
+                        context,
+                        listen: false,
+                      ).setIndex(2);
+                      Navigator.pop(context);
+                    },
+                    child: Icon(Icons.shopping_cart)),
+                builder: (BuildContext context, ShoppingCartProvider value,
+                    Widget child) {
+                  return Stack(
+                    fit: StackFit.expand,
+                    children: <Widget>[
+                      child,
+                      Positioned(
+                        top: 5,
+                        right: 15,
+                        child: Container(
+                          height: 15,
+                          width: 15,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            '${value.count}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                },
+              ),
             ),
             _buildButton(Colors.green, '加入购物车', () {
               var productInfo = _data.productInfo;
