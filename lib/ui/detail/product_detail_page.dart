@@ -3,14 +3,12 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_mvp_shop/base/application.dart';
 import 'package:flutter_mvp_shop/base/base_state.dart';
 import 'package:flutter_mvp_shop/contract/product_detail_contract.dart';
 import 'package:flutter_mvp_shop/model/entity/detail/product_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/detail/product_detail_bean.dart';
 import 'package:flutter_mvp_shop/model/entity/shopping_cart/shopping_cart_bean.dart';
 import 'package:flutter_mvp_shop/presenter/product_detail_presenter.dart';
-import 'package:flutter_mvp_shop/db/shopping_cart_dao.dart';
 import 'package:flutter_mvp_shop/provider/main_index_provider.dart';
 import 'package:flutter_mvp_shop/provider/shopping_cart_provider.dart';
 import 'package:provider/provider.dart';
@@ -232,10 +230,7 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage,
                           ),
                           child: Text(
                             '${value.count}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12
-                            ),
+                            style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
                         ),
                       )
