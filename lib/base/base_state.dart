@@ -30,6 +30,9 @@ abstract class BaseState<T extends StatefulWidget, P extends BasePresenter<V>,
   }
 
   @override
+  BuildContext get currentContext => context;
+
+  @override
   void dispose() {
     super.dispose();
     if (presenter != null) {
