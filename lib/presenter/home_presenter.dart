@@ -12,7 +12,7 @@ class HomePresenter extends IHomePresenter {
       view.showLoading();
     }
 
-    final responseData = await getHomePageContent() as BaseBean<HomeBean>;
+    final responseData = await getHomePageContent(view.currentContext) as BaseBean<HomeBean>;
     if (view != null) {
       view.hideLoading();
       if (responseData.code != '0' && responseData.message.isNotEmpty) {
@@ -34,7 +34,7 @@ class HomePresenter extends IHomePresenter {
       view.showLoading();
 
       final responseData =
-          await getHomeHotSellerContent(pageNo) as BaseListBean<ProductBean>;
+          await getHomeHotSellerContent(view.currentContext, pageNo) as BaseListBean<ProductBean>;
       view.hideLoading();
       if (responseData.code != '0' && responseData.message.isNotEmpty) {
         view.showMessage(message: responseData.message);

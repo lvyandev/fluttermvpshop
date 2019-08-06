@@ -10,7 +10,7 @@ class ProductDetailPresenter extends IProductDetailPresenter {
       view.showLoading();
     }
 
-    final responseData = await getProductDetails(productId) as BaseBean<ProductDetailBean>;
+    final responseData = await getProductDetails(view.currentContext, productId) as BaseBean<ProductDetailBean>;
     if (view != null) {
       view.hideLoading();
       if (responseData.code != '0' && responseData.message.isNotEmpty) {

@@ -17,7 +17,7 @@ class SubCategoryPresenter extends ISubCategoryPresenter {
     }
 
     final responseData =
-        await getCategoryProducts(pageNo, categoryId, subCategoryId)
+        await getCategoryProducts(view.currentContext, pageNo, categoryId, subCategoryId)
             as BaseListBean<ProductBean>;
     if (view != null) {
       view.hideLoading();

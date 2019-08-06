@@ -12,7 +12,7 @@ class CategoryPresenter extends ICategoryPresenter {
     }
 
     final responseData =
-        await getCategoryContent() as BaseListBean<CategoryBean>;
+        await getCategoryContent(view.currentContext) as BaseListBean<CategoryBean>;
     if (view != null) {
       view.hideLoading();
       if (responseData.code != '0' && responseData.message.isNotEmpty) {
