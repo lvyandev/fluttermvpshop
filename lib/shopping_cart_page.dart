@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvp_shop/provider/shopping_cart_provider.dart';
+import 'package:flutter_mvp_shop/ui/shopping_cart/labeled_checkbox.dart';
 import 'package:flutter_mvp_shop/ui/shopping_cart/shopping_cart_item.dart';
 import 'package:provider/provider.dart';
 
@@ -75,8 +76,9 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                   padding: EdgeInsets.only(right: 10),
                   child: Row(
                     children: <Widget>[
-                      Checkbox(
+                      LabeledCheckbox(
                         value: value.isAllSelected,
+                        label: '全选',
                         onChanged: (bool value) {
                           Provider.of<ShoppingCartProvider>(
                             context,
@@ -84,7 +86,6 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                           ).selectAll(value);
                         },
                       ),
-                      Text('全选'),
                       Expanded(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

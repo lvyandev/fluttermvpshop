@@ -26,10 +26,26 @@ class DioUtils {
         ..add(InterceptorsWrapper(
           onRequest: (RequestOptions options) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              showDialog<Widget>(
-                  context: options.extra['context'],
-                  barrierDismissible: false,
-                  builder: (context) => Container(child: Center(child: CircularProgressIndicator())));
+              showGeneralDialog(
+                context: options.extra['context'],
+                barrierDismissible: false,
+                barrierLabel: 'loading',
+                transitionDuration: Duration(microseconds: 150),
+                pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation) =>
+                    SafeArea(
+                  child: Center(
+                    child: Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.black12,
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                        ),
+                        child: CupertinoActivityIndicator()),
+                  ),
+                ),
+              );
             });
             return options;
           },
